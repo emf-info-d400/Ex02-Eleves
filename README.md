@@ -1,8 +1,9 @@
 # Exercice 02 : Eleves
-## durée : 45'
+## durée : 105'
 ## Objectifs visés :
 - Implémentation d’une classe simple
 - Création et utilisation d‘objets stockés dans un tableau
+- Création de votre première association entre classe
 ## PARTIE 1 : Créer votre classe qui modélisera un élève
 Dans ce projet vous allez créer une classe Java qui représentera **un élève**.
 
@@ -50,3 +51,39 @@ class Eleve {
     +getPrenom() String
 }
 ```
+## Partie 3 : Implémentation de la notion de "classe d'élève"
+Créez une nouvelle classe qui représentera la notion de « classe d’élèves » que vous nommerez `Classe`. Vous trouvez tous les détails du contenu de cette classe ci-dessous, dans son diagramme de classe.
+
+```mermaid
+classDiagram
+Classe 0-- Eleve
+class Classe {
+    +int NBRE_MAX_ELEVES = 20
+    -String nom
+    -Eleve[] eleves
+    +Classe(String nom)
+    +ajouteEleve(Eleve eleve) boolean
+    +supprimeEleve(Eleve eleve) boolean
+    +getNombreDePlacesOccupees() int
+    +getNombreDePlacesLibres() int
+    +afficheClasseEtSonContenu() void
+    +getNom() String
+    +getEleves() Eleve[]
+}
+class Eleve {
+    -String prenom
+    -String nom
+    Eleve(String prenom, String nom)
+    +toString() String
+    +getNom() String
+    +getPrenom() String
+}
+```
+
+Pour l’implémentation des méthodes de cette classe observez attentivement leurs signatures. Cela vous guidera efficacement sur ce qu’elles doivent faire (bien choisir les noms de méthodes et d’attribut est crucial !).
+Pour les méthodes qui pourraient voir leur travail échouer elles retournent un booléen indiquant si ça s’est bien passé (**true**) ou mal passé (**false**). 
+Dans le doute, demandez au prof, il vous guidera avec plaisir.
+
+Dans le `main()` de votre programme principal, commencez par créer une nouvelle ´Classe´ qui représentera les élèves de la classe **"30021X"**.
+Créer ensuite 5 élèves différents et rajoutez les à votre classe à l'aide de sa méthode adéquate. Pour terminer, affichez le contenu de la classe en appelant sa méthode adéquate.
+

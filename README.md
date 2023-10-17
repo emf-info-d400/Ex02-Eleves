@@ -56,9 +56,8 @@ Créez une nouvelle classe qui représentera la notion de « classe d’élèves
 
 ```mermaid
 classDiagram
-Classe 0-- Eleve
 class Classe {
-    +int NBRE_MAX_ELEVES = 20
+    +int NBRE_MAX_ELEVES$
     -String nom
     -Eleve[] eleves
     +Classe(String nom)
@@ -78,6 +77,8 @@ class Eleve {
     +getNom() String
     +getPrenom() String
 }
+note for Classe "NBRE_MAX_ELEVES = 20"
+Classe o--> "0..n" Eleve : eleves
 ```
 
 Pour l’implémentation des méthodes de cette classe observez attentivement leurs signatures. Cela vous guidera efficacement sur ce qu’elles doivent faire (bien choisir les noms de méthodes et d’attribut est crucial !).
@@ -87,3 +88,8 @@ Dans le doute, demandez au prof, il vous guidera avec plaisir.
 Dans le `main()` de votre programme principal, commencez par créer une nouvelle ´Classe´ qui représentera les élèves de la classe **"30021X"**.
 Créer ensuite 5 élèves différents et rajoutez les à votre classe à l'aide de sa méthode adéquate. Pour terminer, affichez le contenu de la classe en appelant sa méthode adéquate.
 
+## Partie 4 : Affichage plus intelligent de la classe
+Rendez votre classe Classe plus intelligente en codant plus adéquatement sa méthode `getEleves()`.
+En effet, il n’est ni utile ni pratique de retourner à l’utilisateur notre tableau d’élèves tel quel, car il est fort probable que celui-ci contienne des cases « vides », c-à-d ne contenant PAS d’élèves (**null**).
+Pourquoi embarrasser l’utilisateur avec un tel résultat ? Lui donner un tableau de taille 20 alors qu’il n’y a que 3 élèves dedans ???
+Il faut lui retourner une liste ne contenant QUE les élèves présents dans cette classe, et rien d’autre. Modifiez la méthode `getEleves()` en conséquence. Testez depuis votre `main()` en appelant cette méthode et en affichant les objets retournés sans vérification de présence d’objets.

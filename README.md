@@ -1,140 +1,59 @@
-# MVC_FXML_D400_JDK17LTS
-## C'est quoi ?
-C'est un template Visual Studio Code pour des projets et/ou exercices Java dès le D400 :
-- Basé sur JDK-17-LTS et FXML/JavaFX-17
-- Utilise le pattern MVC décidé en GT-DEV 2023
-- Pas d'utilisation d'interfaces (elles sont vues au module 226a)
+# Exercice 02 : Eleves
+## durée : 45'
+## Objectifs visés :
+- Implémentation d’une classe simple
+- Création et utilisation d‘objets stockés dans un tableau
+## PARTIE 1 : Créer votre classe qui modélisera un élève
+Dans ce projet vous allez créer une classe Java qui représentera **un élève**.
 
-**-> Utile dès le module D400 quand on veut une ihm simple**
-## Plusieurs versions de JavaFX sont inclues dans ce template !
-### Pourquoi plusieurs versions ?
-De nombreux enseignants et apprentis qui font du DEV utilisent des Mac et/ou des PC, souvent les deux. Comme JavaFX ne fait plus partie du JDK il doit être séparément installé/disponible.
-
-Pour simplifier la vie et gagner du temps, ce template contient déjà 3 versions communes de JavaFX 17 : pour **PC/i64**, pour **Mac/i64** et pour **Mac/M1M2**.
-
-### Comment changer de version ?
-Par défaut **ce template utilise la version pour PC/i64**.
-
-VSC est malin et charge automatiquement les librairies du dossier `/lib`. Donc coder sur un PC puis passer ensuite un moment sur un Mac est chose facile : il suffit de copier la bonne version de JavaFX du dossier `/libfx` dans `/lib` pour fonctionner de manière transparente. Et ça roule !
-
-Par exemple, si l'on souhaite développer sur PC, c'est aussi simple que de copier le dossier `openjfx_17_0_7_windows_x64` du dossier `/libfx` dans `/lib` (et d'y enlever la version précédemment utilisée). C'est tout 8-).
-
-### Versions de JavaFX présentes ?
-| Version | Plateforme | Architecture | Dossier à copier dans `/lib` | Commentaires |
-| :---- | :---- | :---- | :---- | :---- |
-| 17.0.7 | PC | i64 | `openjfx_17_0_7_windows_x64` | Déjà présent dans `/lib` par défaut |
-| 17.0.7 | Mac | i64 | `openjfx_17_0_7_osx_x64` | |
-| 17.0.7 | Mac | aarch64 (M1 ou M2) | `openjfx_17_0_7_osx_aarch64` | |
-
-### Comment libérer de l'espace de stockage inutile ?
-Si dans votre projet vous n'avez pas utilité d'avoir plusieurs versions de JavaFX, ne conservez que la version souhaitée dans votre dossier `/lib` et supprimez simplement l'ensemble du dossier `/libfx`. Vous gagnerez environ 3 x ~80MB.
-
-## Vue d'ensemble UML du projet
-Voici une vue d'ensemble du contenu de ce projet sous forme de diagramme UML en utilisation la notation `mermaid` (qui génère des diagrammes à la volée, dynamiquement).
-
-### Détail des classes du projet - packages utilisés
+Dans ce projet créez une classe modélisant un `Eleve`. Un `Eleve` aura comme attributs un nom et un prénom et seulement des getters. Basez-vous sur le diagramme de classe pour les informations manquantes.
 
 ```mermaid
+---
+title: Diagramme de classe : Eleve
+---
 classDiagram
-namespace app {
-    class Application
-}
-namespace ctrl {
-    class Controller
-}
-namespace views {
-    class View
-}
-namespace models {
-    class PrevisionMeteo
-    class Voiture
-}
-namespace services {
-    class ServiceLocation
-    class ServiceMeteo
+
+class Eleve {
+    -String prenom
+    -String nom
+    Eleve(String prenom, String nom)
+    +getNom() String
+    +getPrenom() String
 }
 ```
-### Détail des classes du projet - toutes les classes sur un schéma
+Au dessus du `main()`, créez une constante `NBRE_MAX_ELEVES` de valeur `20`. Celle-ci représente la taille maximale d'une classe d'élèves.
+
+Dans votre `main()`, déclarez une variable `eleves` permettant de contenir `NBRE_MAX_ELEVES` objets de type `Eleve`. Créez ensuite cette structure de données.
+
+Créez ensuite 5 objets différents de type `Eleve`. Placez ces élèves dans les 4 premières cases de votre tableau, laissez les deux emplacements suivants vides et placez ensuite le dernier élève.
+
+Dans une boucle, parcourez l'ensemble de votre tableau à la recherche d'élèves et , lorsque vous en trouvez un, affichez-le sur la console de la manière suivante :
+```
+L'élève N°0 s'apelle => James Cameron
+L'élève N°1 s'appelle => Mac Haroni
+L'élève N°2 s'appelle => John D'Oeuf
+L'élève N°3 s'appelle => Alex Terrieur
+L'élève N°6 s'appelle => Alain Terrieur
+```
+## Partie 2 : Affichage de la classe par elle même
+Rendez plus intelligente votre classe `Eleve` en apprenant à ses objets à s’afficher eux-mêmes de manière lisible et compréhensible.
+
+On va faire en sorte qu’un `sout( unEleve );` affiche automatiquement son prénom et son nom séparé par un espace.
+
+Surchargez la méthode `toString()` de votre classe Eleve pour faire ceci. Adaptez votre programme principal dans le main() pour en tirer profit.
 ```mermaid
+---
+title: Diagramme de classe : Eleve avec toString()
+---
 classDiagram
 
-    class Application {
-        +main(String[] args)$ void
-    }
-
-    class Controller {
-        -View view
-        -ServiceMeteo serviceMeteo
-        -ServiceLocation serviceLocation
-        Controller()
-        +start() void
-        actionRafraichirPrevisionMeteo() void
-        actionLouerUneVoiture(Voiture voiture) void
-        actionRestituerUneVoiture(Voiture voiture) void
-    }
-
-    class View {
-        -Controller controller
-        -TextField textFieldPrevisionMeteo
-        -ListView<Voiture> listViewVoituresDisponibles
-        -ListView<Voiture> listViewVoituresLouees
-        View(Controller controller)
-        +start() void
-        -actionRafraichirPrevisionMeteo() void
-        -actionLouerUneVoiture(Voiture voiture) void
-        -actionRestituerUneVoiture(Voiture voiture) void
-        +initialize(URL url, ResourceBundle rb) void
-        +messageInfo(String message) void
-        +messageErreur(String message) void
-        +afficheDernierePrevision(PrevisionMeteo prevision) void
-        +afficheVoituresDisponibles(Voiture[] voituresDisponibles, Voiture voitureASelectionner) void
-        +afficheVoituresLouees(Voiture[] voituresLouees, Voiture voitureASelectionner) void
-        -tableauEnListeSansNulls(Voiture[] voitures) ArrayList<Voiture>
-    }
-
-    class PrevisionMeteo {
-        -String prevision
-        PrevisionMeteo( String prevision )
-        +getPrevision() String
-    }
-
-    class Voiture {
-        -String marque
-        -String modele
-        Voiture( String marque, String modele )
-        +getMarque() String
-        +getModele() String
-        +toString() String
-    }
-
-    class ServiceLocation {
-        -int MAX_VOITURES_LOUEES = 4$
-        -Voiture[] voituresDisponibles
-        -Voiture[] voituresLoueesParLeClient
-        ServiceLocation()
-        +listeDesVoituresDisponibles() Voiture[]
-        +listeDesVoituresLoueesParLeClient() Voiture[]
-        +clientLoueUneVoiture(Voiture voiture) boolean
-        +clientRestitueUneVoiture(Voiture voiture) boolean
-    }
-
-    class ServiceMeteo {
-        ServiceMeteo()
-        +prochainBulletinMeteo() PrevisionMeteo
-    }
-
-    View ..|> Initializable : "implemente"
-    
-    ServiceLocation o--> "0..N" Voiture : voituresDisponibles
-    ServiceLocation o--> "0..N" Voiture : voituresLoueesParLeClient
-
-    Controller o--> "1" ServiceMeteo : serviceMeteo
-    Controller o--> "1" ServiceLocation : serviceLocation
-    Controller o--> "1" View : view
-    View o--> "1" Controller : controller
-
-    ServiceMeteo ..> PrevisionMeteo : "utilise"
-    Application ..> Controller : "utilise"
-
-
+class Eleve {
+    -String prenom
+    -String nom
+    Eleve(String prenom, String nom)
+    +toString() String
+    +getNom() String
+    +getPrenom() String
+}
 ```

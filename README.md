@@ -9,9 +9,6 @@ Dans ce projet vous allez créer une classe Java qui représentera **un élève*
 Dans ce projet créez une classe modélisant un `Eleve`. Un `Eleve` aura comme attributs un nom et un prénom et seulement des getters. Basez-vous sur le diagramme de classe pour les informations manquantes.
 
 ```mermaid
----
-title: Diagramme de classe : Eleve
----
 classDiagram
 
 class Eleve {
@@ -43,11 +40,7 @@ On va faire en sorte qu’un `sout( unEleve );` affiche automatiquement son pré
 
 Surchargez la méthode `toString()` de votre classe Eleve pour faire ceci. Adaptez votre programme principal dans le main() pour en tirer profit.
 ```mermaid
----
-title: Diagramme de classe : Eleve avec toString()
----
 classDiagram
-
 class Eleve {
     -String prenom
     -String nom
